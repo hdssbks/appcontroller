@@ -1,0 +1,17 @@
+apiVersion: appcontroller.k8s.io/v1alpha1
+kind: App
+metadata:
+  name: example-app
+spec:
+  labels:
+    app: example-app
+  deployment:
+    replicas: 1
+    name: example-app-deploy
+    image: nginx:v1.13
+  service:
+    name: example-app-service
+  ingress:
+    name: example-app-ingress
+status:
+  availableReplicas: 1
