@@ -25,6 +25,7 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd "${SCRIPT_ROOT}"; ls -d -1 ./vendor/k8s.io/code-
 # --output-base    because this script should also be able to run inside the vendor dir of
 #                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
 #                  instead of the $GOPATH directly. For normal projects this can be dropped.
+# 其中appcontroller/pkg/generated和appcontroller/pkg/apis的appcontroller为包名，appcontroller:v1alpha1为group和version，即appcontroller/pkg/apis下的目录。而--output-base表示生成代码的目录，--output-base应与项目的上级目录对齐，比如项目目录为/home/appcontroller，那么--output-base应为/home，如果--output-base为/tmp，那么生成的代码位置为/tmp/appcontroller/pkg/generated，所以基于此，项目目录名应与包名一致，否则生成代码位置将不能与项目对齐
 bash "${CODEGEN_PKG}"/generate-groups.sh "deepcopy,client,informer,lister" \
   appcontroller/pkg/generated appcontroller/pkg/apis \
   appcontroller:v1alpha1 \
